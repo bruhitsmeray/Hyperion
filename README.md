@@ -1,6 +1,7 @@
 # Hyperion
 
 ```
+Type: Plugin
 Version: -
 Release: -
 ```
