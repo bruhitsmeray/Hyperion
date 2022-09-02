@@ -2,7 +2,7 @@
 
 
 #include "BaseInstance.h"
-#include "CSL_Window.h"
+#include "Konsole.h"
 
 #include "OnlineSubsystem.h"
 #include "Interfaces/OnlineIdentityInterface.h"
@@ -34,7 +34,7 @@ void UBaseInstance::Login()
 			Identity->Login(0, Credentials);
 		}
 	} else {
-		UCSL_Window::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures box to be able to login.");
+		UKonsole::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures box to be able to login.");
 	}
 }
 
@@ -63,7 +63,7 @@ void UBaseInstance::GetAllFriends()
 			}
 		}
 	} else {
-		UCSL_Window::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures and UseFriendsList boxes to be able to see the Friends list.");
+		UKonsole::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures and UseFriendsList boxes to be able to see the Friends list.");
 	}
 }
 
@@ -83,7 +83,7 @@ void UBaseInstance::OnGetAllFriendsComplete(int32 LocalUserNumber, bool bWasSucc
 					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%s"), *F_Name));
 				}
 			} else {
-				UCSL_Window::PrintToConsole("Instance", "Warning", "Failed to retrieve the friends list.");
+				UKonsole::PrintToConsole("Instance", "Warning", "Failed to retrieve the friends list.");
 			}
 		}
 	}
@@ -98,7 +98,7 @@ void UBaseInstance::ShowFriendsUI()
 			UIPtr->ShowFriendsUI(0);
 		}
 	} else {
-		UCSL_Window::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures and UseFriendsList boxes to be able to see the Friends UI.");
+		UKonsole::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures and UseFriendsList boxes to be able to see the Friends UI.");
 	}
 }
 
@@ -111,6 +111,6 @@ void UBaseInstance::ShowAchievementsUI()
 			UIPtr->ShowAchievementsUI(0);
 		}
 	} else {
-		UCSL_Window::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures and UseAchievements boxes to be able to see the Achievements UI.");
+		UKonsole::PrintToConsole("Instance", "Warning", "Please check the UseOnlineFeatures and UseAchievements boxes to be able to see the Achievements UI.");
 	}
 }

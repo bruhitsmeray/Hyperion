@@ -1,12 +1,12 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "0.1.6",
+	"VersionName": "0.2.0",
 	"FriendlyName": "Hyperion",
 	"Description": "",
 	"Category": "Miscellaneous",
-	"CreatedBy": "whiteex",
-	"CreatedByURL": "",
+	"CreatedBy": "Whiteline",
+	"CreatedByURL": "https://dev-whiteex.github.io/",
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
@@ -27,10 +27,6 @@
 			"Enabled": true
 		},
 		{
-			"Name": "conSole",
-			"Enabled": true
-		},
-		{
 			"Name": "OnlineSubsystem",
 			"Enabled": true
 		},
@@ -39,7 +35,7 @@
 			"Enabled": true
 		},
 		{
-			"Name": "Konsole",
+			"Name": "KonsolePlugin",
 			"Enabled": true
 		}
 	]

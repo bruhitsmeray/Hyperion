@@ -24,10 +24,10 @@ public class Hyperion : ModuleRules
 			new string[]
 			{
 				"Core",
-				"conSole",
 				"OnlineSubsystem",
 				"OnlineSubsystemEOS",
 				"OnlineSubsystemEOSPlus",
+				"KonsolePlugin",
 				"VitalX",
 				"UMG",
 				// ... add other public dependencies that you statically link with here ...

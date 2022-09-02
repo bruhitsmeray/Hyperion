@@ -4,6 +4,7 @@
 #include "BaseChr.h"
 #include "Vitals.h"
 
+#include "CableComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -156,15 +157,15 @@ void ABaseChr::DevCam(int Mode)
 			bDevWalk = true;
 			GetCharacterMovement()->SetMovementMode(MOVE_Flying);
 			SetActorEnableCollision(false);
-			UCSL_Window::PrintToConsole("BaseChr", "Warning", "DevCam is now ON.");
+			UKonsole::PrintToConsole("BaseChr", "Warning", "DevCam is now ON.");
 		} else if(!Mode && bDevWalk || Mode == 0) {
 			bDevWalk = false;
 			GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 			SetActorEnableCollision(true);
-			UCSL_Window::PrintToConsole("BaseChr", "Warning", "DevCam is now OFF.");
+			UKonsole::PrintToConsole("BaseChr", "Warning", "DevCam is now OFF.");
 		}	
 	} else {
-		UCSL_Window::PrintToConsole("BaseChr", "Warning", "DevCam needs AllowCheats set to 1. Please set AllowCheats to 1 and try again!");
+		UKonsole::PrintToConsole("BaseChr", "Warning", "DevCam needs AllowCheats set to 1. Please set AllowCheats to 1 and try again!");
 	}
 }
 
@@ -173,10 +174,10 @@ void ABaseChr::SetAllowCheats(int Mode)
 	if(Mode == 1)
 	{
 		bAllowCheats = true;
-		UCSL_Window::PrintToConsole("BaseChr", "Notice", FString::Printf(TEXT("AllowCheats changed to %i"), Mode));
+		UKonsole::PrintToConsole("BaseChr", "Notice", FString::Printf(TEXT("AllowCheats changed to %i"), Mode));
 	} else if(Mode == 0) {
 		bAllowCheats = false;
-		UCSL_Window::PrintToConsole("BaseChr", "Notice", FString::Printf(TEXT("AllowCheats changed to %i"), Mode));
+		UKonsole::PrintToConsole("BaseChr", "Notice", FString::Printf(TEXT("AllowCheats changed to %i"), Mode));
 	}
 }
 
@@ -198,20 +199,20 @@ void ABaseChr::TraceGrab(bool& ReturnValue, FVector& ReturnLocation)
 
 		if(bHit)
 		{
-			UCSL_Window::PrintToConsole("BaseChr", "Warning", "A hit has been registered.");
+			UKonsole::PrintToConsole("BaseChr", "Warning", "A hit has been registered.");
 			if(IsValid(HitResult.GetComponent()) && HitResult.GetComponent()->IsSimulatingPhysics())
 			{
 				ReturnValue = bHit;
 				HitComponent = HitResult.GetComponent();
 				ReturnLocation = HitResult.GetComponent()->GetComponentLocation();
 			} else {
-				UCSL_Window::PrintToConsole("BaseChr", "Warning", "Component not available or does not simulate physics.");
+				UKonsole::PrintToConsole("BaseChr", "Warning", "Component not available or does not simulate physics.");
 			}
 		} else {
-			UCSL_Window::PrintToConsole("BaseChr", "Warning", "No hit registered.");
+			UKonsole::PrintToConsole("BaseChr", "Warning", "No hit registered.");
 		}
 	} else {
-		UCSL_Window::PrintToConsole("BaseChr", "Warning", "World is not available.");
+		UKonsole::PrintToConsole("BaseChr", "Warning", "World is not available.");
 	}
 }
 
@@ -280,19 +281,19 @@ bool ABaseChr::TraceGrapple(float Distance)
 		bool bHit = World->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, TraceParams);
 		if(bHit && !HitResult.GetComponent()->IsSimulatingPhysics())
 		{
-			UCSL_Window::PrintToConsole("BaseChr", "Warning", "A hit has been registered.");
+			UKonsole::PrintToConsole("BaseChr", "Warning", "A hit has been registered.");
 			GrappleLocation = HitResult.Location;
 			if(UKismetMathLibrary::Vector_Distance(GrappleLocation, GetActorLocation()) > 3072.0f)
 			{
 				bIsHookSuppressed = true;
-				UCSL_Window::PrintToConsole("BaseChr", "Warnings", "The registered hit is too far away from the player.");
+				UKonsole::PrintToConsole("BaseChr", "Warnings", "The registered hit is too far away from the player.");
 				return false;
 			}
 			bIsHookSuppressed = false;
 			return HitResult.GetComponent()->IsSimulatingPhysics(); // What is this doing? I'll experiment with this line a bit and get rid of it if it does nothing.
 		}
 		bIsHookSuppressed = true;
-		UCSL_Window::PrintToConsole("BaseChr", "Warning", "No hit registered.");
+		UKonsole::PrintToConsole("BaseChr", "Warning", "No hit registered.");
 		return false;
 	}
 	return false;
@@ -316,7 +317,7 @@ void ABaseChr::SetGrappleVisibility(bool Visibility)
 	{
 		Cable->SetVisibility(Visibility);
 	} else {
-		UCSL_Window::PrintToConsole("BaseChr", "Warning", "No cable component found! Please add a cable component to the Player Character blueprint in order to use the Grapple functions!");
+		UKonsole::PrintToConsole("BaseChr", "Warning", "No cable component found! Please add a cable component to the Player Character blueprint in order to use the Grapple functions!");
 	}
 }
 
@@ -325,7 +326,7 @@ void ABaseChr::BeginSprint()
 	if(IsMoving() && !bIsCrouching)
 	{
 		GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed * BaseWalkSpeedMultiplier;
-		UCSL_Window::PrintToConsole("BaseChr", "Warning", FString::Printf(TEXT("MaxWalkSpeed is now at: %f (Sprinting/Dashing)."), GetCharacterMovement()->MaxWalkSpeed));
+		UKonsole::PrintToConsole("BaseChr", "Warning", FString::Printf(TEXT("MaxWalkSpeed is now at: %f (Sprinting/Dashing)."), GetCharacterMovement()->MaxWalkSpeed));
 	}
 }
 
@@ -334,7 +335,7 @@ void ABaseChr::StopSprint()
 	if (GetCharacterMovement()->MaxWalkSpeed > BaseWalkSpeed)
 	{
 		GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
-		UCSL_Window::PrintToConsole("BaseChr", "Warning", FString::Printf(TEXT("MaxWalkSpeed is now at: %f (Walking)."), GetCharacterMovement()->MaxWalkSpeed));
+		UKonsole::PrintToConsole("BaseChr", "Warning", FString::Printf(TEXT("MaxWalkSpeed is now at: %f (Walking)."), GetCharacterMovement()->MaxWalkSpeed));
 	}
 }
 
@@ -370,7 +371,7 @@ void ABaseChr::DashVertically(float AxisV, int Value)
 		}
 	}
     UVitals::RemoveAuxPower(Value);
-	UCSL_Window::PrintToConsole("BaseChr", "Warning", "DashVertically function called.");
+	UKonsole::PrintToConsole("BaseChr", "Warning", "DashVertically function called.");
 }
 
 void ABaseChr::DashHorizontally(float AxisH, int Value)
@@ -396,6 +397,6 @@ void ABaseChr::DashHorizontally(float AxisH, int Value)
 		}
 	}
 	UVitals::RemoveAuxPower(Value);
-	UCSL_Window::PrintToConsole("BaseChr", "Warning", "DashHorizontally function called");
+	UKonsole::PrintToConsole("BaseChr", "Warning", "DashHorizontally function called");
 }
 

@@ -8,13 +8,12 @@
 
 FString UHWDetails::GetCPUBrand()
 {
-	return FWindowsPlatformMisc::GetCPUBrand();
+	return FPlatformMisc::GetCPUBrand();
 }
 
 FString UHWDetails::GetGPUBrand()
 {
-	FGPUDriverInfo DriverInfo;
-	return DriverInfo.DeviceDescription;
+	return FPlatformMisc::GetPrimaryGPUBrand();
 }
 
 FString UHWDetails::GetRHI()
@@ -25,10 +24,7 @@ FString UHWDetails::GetRHI()
 
 int32 UHWDetails::GetCPUCores()
 {
-	if(PLATFORM_WINDOWS)
-	{
-		return FWindowsPlatformMisc::NumberOfCores();
-	}
+	return FPlatformMisc::NumberOfCores();
 }
 
 int32 UHWDetails::GetCPUThreads()
@@ -44,10 +40,7 @@ int32 UHWDetails::GetRAMCapacity()
 	return FGenericPlatformMemory::GetPhysicalGBRam();
 }
 
-bool UHWDetails::IsWindows()
+FString UHWDetails::GetOSVersion()
 {
-	if(PLATFORM_WINDOWS)
-	{
-		return true;
-	}
+	return FPlatformMisc::GetOSVersion();
 }

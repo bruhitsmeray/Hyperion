@@ -3,9 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CSL_Window.h"
+#include "Konsole.h"
 
-#include "CableComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "Components/SpotLightComponent.h"
@@ -70,19 +69,19 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Character|Mouse|Sensitivity")
 		float GetMouseSens() const
 		{
-			UCSL_Window::PrintToConsole("Character", "Warning", FString::Printf(TEXT("Sensitivity: %f"), Sensitivity));
+			UKonsole::PrintToConsole("Character", "Warning", FString::Printf(TEXT("Sensitivity: %f"), Sensitivity));
 			return Sensitivity;	
 		}
 	UFUNCTION(BlueprintPure, Category = "Character|Gamepad|Sensitivity")
 		float GetSensZ() const
 		{
-			UCSL_Window::PrintToConsole("Character", "Warning", FString::Printf(TEXT("Z Sensitivity: %f"), SensitivityZ));
+			UKonsole::PrintToConsole("Character", "Warning", FString::Printf(TEXT("Z Sensitivity: %f"), SensitivityZ));
 			return SensitivityZ;
 		}
 	UFUNCTION(BlueprintPure, Category = "Character|Gamepad|Sensitivity")
 		float GetSensY() const
 		{
-			UCSL_Window::PrintToConsole("Character", "Warning", FString::Printf(TEXT("X Sensitivity: %f"), SensitivityY));
+			UKonsole::PrintToConsole("Character", "Warning", FString::Printf(TEXT("X Sensitivity: %f"), SensitivityY));
 			return SensitivityY;
 		}
 
@@ -125,7 +124,7 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Preferences|Gameplay")
 		bool bAllowWallrun = false;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Preferences|Gameplay")
-		bool bUseSmoothCrouch = false;
+		bool bUseSmoothCrouch = true;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Preferences|Gameplay")
 		bool bAllowGrapplingHook = false;
 

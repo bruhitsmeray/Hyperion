@@ -28,5 +28,5 @@ public:
 	UFUNCTION(Exec, BlueprintPure, meta = (DisplayName = "Get RAM capacity", Keywords = "RAM capacity"), Category = "Hardware Info|RAM")
 		static int32 GetRAMCapacity();
 	UFUNCTION(Exec, BlueprintPure, Category = "Hardware Info")
-		static bool IsWindows();
+		static FString GetOSVersion();
 };
